@@ -1,0 +1,3 @@
+return {
+	{ "epwalsh/pomo.nvim" },
+}
