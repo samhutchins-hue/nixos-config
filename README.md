@@ -513,3 +513,4 @@ Other dotfiles that I learned / copy from:
 [Bibata-Modern-Ice]: https://www.gnome-look.org/p/1197198
 [maxfetch]: https://github.com/jobcmax/maxfetch
 # nixos-config
+# nixos-config
