@@ -17,7 +17,7 @@
       markdownlint-cli2
       nixpkgs-fmt
       shfmt
-      zls
+      #zls
       nodePackages.prettier
       vimPlugins.copilot-vim
       vimPlugins.cmake-tools-nvim

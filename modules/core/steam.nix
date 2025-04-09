@@ -1,26 +1,33 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 {
-  programs = {
-    steam = {
-      enable = true;
+  programs.steam = {
+    enable = true;
 
-      remotePlay.openFirewall = true;
-      dedicatedServer.openFirewall = false;
+    # Steam-specific options
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = false;
+    gamescopeSession.enable = true;
 
-      gamescopeSession.enable = true;
+    # Extra compatibility packages for Steam
+    extraCompatPackages = [
+      pkgs.proton-ge-bin
+    ];
 
-      extraCompatPackages = [
-        pkgs.proton-ge-bin
+    # Override the default Steam package by adding extra dependencies
+    package = pkgs.steam.override {
+      extraPkgs = pkgs: with pkgs; [
+        xorg.libXcursor
+        xorg.libXi
+        xorg.libXinerama
+        xorg.libXScrnSaver
+        libpng
+        libpulseaudio
+        libvorbis
+        stdenv.cc.cc.lib
+        libkrb5
+        keyutils
       ];
     };
-
-    #gamescope = {
-    #  enable = true;
-    #  capSysNice = false;
-    #  args = [
-    #    "--rt"
-    #    "--expose-wayland"
-    #  ];
-    #};
   };
 }
+

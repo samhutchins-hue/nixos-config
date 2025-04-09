@@ -5,8 +5,6 @@
   ...
 }: {
   imports = [
-    ./aseprite/aseprite.nix # pixel art editor
-    ./audacious.nix # music player
     ./bat.nix # better cat command
     ./browser.nix # firefox based browser
     ./btop.nix # resouces monitor
@@ -22,13 +20,12 @@
     ./kitty.nix # terminal
     ./swayosd.nix # brightness / volume wiget
     ./swaync/swaync.nix # notification deamon
-    ./micro.nix # nano replacement
     ./nemo.nix # file manager
     #./nixvim.nix
     ./zathura.nix
-    ./typst.nix
-    ./obsidian.nix
-    ./p10k/p10k.nix
+    ./typst.nix # 
+    ./obsidian.nix # note taking
+    ./p10k/p10k.nix # terminal status line
     ./packages.nix # other packages
     ./rofi.nix # launcher
     ./scripts/scripts.nix # personal scripts
@@ -36,18 +33,15 @@
     ./starship.nix # shell prompt
     ./swaylock.nix # lock screen
     ./viewnior.nix # image viewer
-    ./vscodium.nix # vscode forck
     ./waybar # status bar
     ./waypaper.nix # GUI wallpaper picker
     ./xdg-mimes.nix # xdg config
     ./yazi.nix # terminal file manager
     ./zsh # shell
 
-    ./wezterm.nix
     ./emacs.nix
-    ./helix.nix
-    #./neovim
-    ./neovim.nix
+    ./neovim
+    #./neovim.nix
     #./nvf-configuration.nix
 
     ./ghostty.nix

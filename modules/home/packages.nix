@@ -104,10 +104,10 @@ in
 
 
     # C / C++
-    gcc
+    #gcc
     gdb
     gnumake
-    #clang
+    clang
     cmake
     libtool
     #simgrid
