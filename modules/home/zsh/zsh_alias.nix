@@ -44,8 +44,8 @@
       piv = "python -m venv .venv";
       psv = "source .venv/bin/activate";
 
-      # class
-      submit = "python3 -m autograder.run.submit";
+      # neovim
+      vim = "nix run github:samhutchins-hue/nixvimtemp";
     };
   };
 }

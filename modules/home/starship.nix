@@ -1,11 +1,10 @@
-{ lib, inputs, ... }: 
+{ lib, inputs, ... }:
 {
   programs.starship = {
     enable = false;
 
     enableBashIntegration = true;
     enableZshIntegration = true;
-    enableNushellIntegration = true;
 
     settings = {
       format = lib.concatStrings [
@@ -61,7 +60,7 @@
         style = "bg:color_aqua bold fg:color_fg0";
         format = "[$all_status$ahead_behind]($style)";
       };
-      
+
       nix_shell = {
         format = "[ via nix $name ]($style)";
         style = "bg:color_blue bold fg:color_fg0";

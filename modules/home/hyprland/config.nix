@@ -1,6 +1,20 @@
 _: {
   wayland.windowManager.hyprland = {
     settings = {
+      general = {
+        gaps_in = 5;
+        gaps_out = 10;
+        border_size = 2;
+        "col.active_border" = "rgb(A89984)";
+        "col.inactive_border" = "0x00000000";
+        layout = "dwindle";
+        "$mainMod" = "SUPER";
+      };
+
+      dwindle = {
+        pseudotile = "yes";
+        preserve_split = "yes";
+      };
       # autostart
       exec-once = [
         "systemctl --user import-environment &"
@@ -335,27 +349,6 @@ _: {
     };
 
     extraConfig = "
-      # General settings
-      general {
-          gaps_in = 5
-          gaps_out = 10
-          border_size = 2
-          col.active_border = rgb(A89984)
-          col.inactive_border = 0x00000000
-          layout = dwindle
-          no_border_on_floating = false
-      }
-
-      # Dwindle layout
-      dwindle {
-          no_gaps_when_only = true
-          pseudotile = yes
-          preserve_split = yes
-          force_split = 0
-          use_active_for_splits = true
-      }
-      
-      # Your monitor config can stay here too
       monitor=HDMI-A-1, 1920x1080@70, -1920x0, 1
       monitor=DP-3, 2560x1440@170, 0x0, 1
       monitor=DP-2, 2560x1440@165, 2560x0, 1

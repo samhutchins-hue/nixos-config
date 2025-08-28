@@ -23,7 +23,6 @@
     ./swayosd.nix # brightness / volume wiget
     ./swaync/swaync.nix # notification deamon
     ./nemo.nix # file manager
-    #./nixvim.nix
     ./zathura.nix
     ./typst.nix
     ./obsidian.nix # note taking
@@ -40,14 +39,8 @@
     ./xdg-mimes.nix # xdg config
     ./yazi.nix # terminal file manager
     ./zsh # shell
-    ./nushell # shell
     ./visual.nix # vscode for jupyter notebooks
     ./direnv.nix # direnv for nix
-
-    ##./emacs.nix
-    #./neovim.nix
-    ./nvim
-    #./nvf-configuration.nix
 
     ./ghostty.nix
   ];
