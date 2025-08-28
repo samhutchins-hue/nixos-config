@@ -14,6 +14,8 @@
 
     nix-gaming.url = "github:fufexan/nix-gaming";
 
+    nixvim.url = "github:samhutchins-hue/nixvimtemp";
+
     hyprland = {
       type = "git";
       url = "https://github.com/hyprwm/Hyprland";
@@ -35,10 +37,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    ghostty = {
-      url = "github:ghostty-org/ghostty";
-    };
-
     hyprmag.url = "github:SIMULATAN/hyprmag";
 
     nix-flatpak.url = "github:gmodena/nix-flatpak";
@@ -51,39 +49,42 @@
     };
   };
 
-  outputs = {
-    nixpkgs,
-    self,
-    ...
-  } @ inputs: let
-    username = "samh";
-    system = "x86_64-linux";
-  in {
-    nixosConfigurations = {
-      desktop = nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [./hosts/desktop];
-        specialArgs = {
-          host = "desktop";
-          inherit self inputs username;
+  outputs =
+    {
+      nixpkgs,
+      self,
+      ...
+    }@inputs:
+    let
+      username = "samh";
+      system = "x86_64-linux";
+    in
+    {
+      nixosConfigurations = {
+        desktop = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [ ./hosts/desktop ];
+          specialArgs = {
+            host = "desktop";
+            inherit self inputs username;
+          };
         };
-      };
-      laptop = nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [./hosts/laptop];
-        specialArgs = {
-          host = "laptop";
-          inherit self inputs username;
+        laptop = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [ ./hosts/laptop ];
+          specialArgs = {
+            host = "laptop";
+            inherit self inputs username;
+          };
         };
-      };
-      vm = nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [./hosts/vm];
-        specialArgs = {
-          host = "vm";
-          inherit self inputs username;
+        vm = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [ ./hosts/vm ];
+          specialArgs = {
+            host = "vm";
+            inherit self inputs username;
+          };
         };
       };
     };
-  };
 }

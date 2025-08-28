@@ -21,6 +21,7 @@
           # LazyVim
           LazyVim
           cmake-tools-nvim
+          codecompanion-nvim
           bufferline-nvim
           cmp-buffer
           cmp-nvim-lsp

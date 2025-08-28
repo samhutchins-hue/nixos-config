@@ -1,8 +1,3 @@
-{ inputs, pkgs, ... }:
-{
-  programs.nixvim = {
-    enable = true;
-    imports = [inputs.lazyvim-nixvim];
-  };
-  #inputs.Neve.packages.${pkgs.system}.default
+{ inputs, ... }: {
+  home.packages = [ inputs.nixvim.packages.${pkgs.system}.default ];
 }

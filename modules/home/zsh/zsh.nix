@@ -19,19 +19,8 @@
       }
     ];
 
-    initExtra = ''
-      # Add Doom Emacs to PATH
-      export PATH="$HOME/.config/emacs/bin:$PATH"
-      # Add leetcode.el venv to PATH
-      export PATH=$HOME/Documents/projects/leetcode/.venv/bin:$PATH
-
-      # add nixcatskickstart to path
-      export PATH="$HOME/nixos-config/modules/home/neovim/result/bin:$PATH"
-
-      export TYPST_ROOT="$HOME/projects/cse120"
-      export LEETCODE_SESSION="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfYXV0aF91c2VyX2lkIjoiMTIwMDQxMTkiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJhbGxhdXRoLmFjY291bnQuYXV0aF9iYWNrZW5kcy5BdXRoZW50aWNhdGlvbkJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIwY2E2MTRlMzYzNWVkMjhjZjYzNjRlYzExOTJmMWI4NzVkZDliNzEyZjIzMjI0ZGY3YjZlNDc0ODZmMjk4NmU1Iiwic2Vzc2lvbl91dWlkIjoiZGQxZWE3YzciLCJpZCI6MTIwMDQxMTksImVtYWlsIjoic2FtaHV0Y2hpbnMxMjNAZ21haWwuY29tIiwidXNlcm5hbWUiOiJBcmVtaWhjIiwidXNlcl9zbHVnIjoiQXJlbWloYyIsImF2YXRhciI6Imh0dHBzOi8vYXNzZXRzLmxlZXRjb2RlLmNvbS91c2Vycy9kZWZhdWx0X2F2YXRhci5qcGciLCJyZWZyZXNoZWRfYXQiOjE3MzgwMzczNjAsImlwIjoiMTI4LjExNC4yNTUuMjQ0IiwiaWRlbnRpdHkiOiI3MWU0NzE4NGYwMTA2NWVlYzE0YjU3NmRhNjY4MjdiZiIsImRldmljZV93aXRoX2lwIjpbIjU4NWYxYjM2NzM2NmQzZWEwNzlhYjJjZDgzMGU0OTg5IiwiMTI4LjExNC4yNTUuMjQ0Il0sIl9zZXNzaW9uX2V4cGlyeSI6MTIwOTYwMH0.LeP-VH0uY6ITh1oMOQG3yNG9FXrysLAjdn0PM9z_iEE"
-      export LEETCODE_CSRFTOKEN="3zHVXHD0YyLrDd6v5IaLP6Cg5SIGibTQszDGlxdkVhXg4xAkFIr8AKEXYtCT3X2T"
-    '';
+    #initExtra = ''
+    #'';
 
     completionInit = ''
       # Load Zsh modules

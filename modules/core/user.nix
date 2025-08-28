@@ -14,9 +14,9 @@
       home.homeDirectory = "/home/${username}";
       home.stateVersion = "24.05";
       programs.home-manager.enable = true;
-     ## home.sessionVariables = {
-     ##   FLAKE = "${inputs.self}"; # Reference the flake itself
-     ## };
+      ## home.sessionVariables = {
+      ##   FLAKE = "${inputs.self}"; # Reference the flake itself
+      ## };
     };
   };
 
@@ -24,7 +24,7 @@
     isNormalUser = true;
     description = "${username}";
     extraGroups = [ "networkmanager" "wheel" ];
-    shell = pkgs.zsh;
+    shell = pkgs.nushell;
   };
   nix.settings.allowed-users = [ "${username}" ];
 }

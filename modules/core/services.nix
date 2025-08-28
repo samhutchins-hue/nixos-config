@@ -1,8 +1,9 @@
-{ ... }: 
+{ ... }:
 {
   services = {
     gvfs.enable = true;
     gnome.gnome-keyring.enable = true;
+    gnome.gcr-ssh-agent.enable = true;
     dbus.enable = true;
     fstrim.enable = true;
   };

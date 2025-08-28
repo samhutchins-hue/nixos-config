@@ -1,4 +1,4 @@
-{ ... }: {
+_: {
   wayland.windowManager.hyprland = {
     settings = {
       # autostart
@@ -38,21 +38,6 @@
         };
       };
 
-      general = {
-        "$mainMod" = "SUPER";
-        layout = "dwindle";
-        # 5
-        # 10
-        gaps_in = 5;
-        gaps_out = 10;
-        # 2
-        border_size = 2;
-        "col.active_border" = "rgb(A89984)";
-        "col.inactive_border" = "0x00000000";
-        #border_part_of_window = false;
-        no_border_on_floating = false;
-      };
-
       misc = {
         disable_autoreload = true;
         disable_hyprland_logo = true;
@@ -65,16 +50,6 @@
         middle_click_paste = false;
       };
 
-      dwindle = {
-        # no_gaps_when_only = false;
-        force_split = 0;
-        special_scale_factor = 1.0;
-        split_width_multiplier = 1.0;
-        use_active_for_splits = true;
-        pseudotile = "yes";
-        preserve_split = "yes";
-      };
-
       master = {
         new_status = "master";
         special_scale_factor = 1;
@@ -82,14 +57,14 @@
       };
 
       decoration = {
-        rounding = 0;
+        rounding = 10;
         # active_opacity = 0.90;
         # inactive_opacity = 0.90;
         # fullscreen_opacity = 1.0;
 
         blur = {
           enabled = true;
-          size = 2;
+          size = 4;
           passes = 2;
           # size = 4;
           # passes = 2;
@@ -150,7 +125,7 @@
         "$mainMod, Return, exec, ghostty"
         "ALT, Return, exec, [float; center; size 950 650] ghostty"
         "$mainMod SHIFT, Return, exec, [fullscreen] ghostty"
-        "$mainMod, B, exec, hyprctl dispatch exec '[workspace 1 silent] zen'"
+        "$mainMod, B, exec, hyprctl dispatch exec '[workspace 1 silent] firefox'"
         "$mainMod, Q, killactive,"
         "$mainMod, F, fullscreen, 0"
         "$mainMod SHIFT, F, fullscreen, 1"
@@ -278,22 +253,20 @@
 
       # windowrule
       windowrule = [
-        "float,Viewnior"
-        "center,Viewnior"
-        "size 1200 800,Viewnior"
-        "float,imv"
-        "center,imv"
-        "size 1200 725,imv"
-        "float,mpv"
-        "center,mpv"
-        "tile,Aseprite"
-        "size 1200 725,mpv"
-        "float,audacious"
-        "pin,rofi"
-        "pin,waypaper"
-        "tile, neovide"
-        "idleinhibit focus,mpv"
-        "float,udiskie"
+        "float,class:Viewnior"
+        "center,class:Viewnior"
+        "size 1200 800,class:Viewnior"
+        "float,class:imv"
+        "center,class:imv"
+        "size 1200 725,class:imv"
+        "float,class:mpv"
+        "center,class:mpv"
+        "size 1200 725,class:mpv"
+        "pin,class:rofi"
+        "pin,class:waypaper"
+        "tile, class:neovide"
+        "idleinhibit focus,class:mpv"
+        "float,class:udiskie"
         "float,title:^(Transmission)$"
         "float,title:^(Volume Control)$"
         "float,title:^(Firefox — Sharing Indicator)$"
@@ -354,43 +327,38 @@
         "maxsize 1 1,class:^(xwaylandvideobridge)$"
         "noblur,class:^(xwaylandvideobridge)$"
 
-        # No gaps when only
-        "bordersize 0, floating:0, onworkspace:w[t1]"
-        "rounding 0, floating:0, onworkspace:w[t1]"
-        "bordersize 0, floating:0, onworkspace:w[tg1]"
-        "rounding 0, floating:0, onworkspace:w[tg1]"
-        "bordersize 0, floating:0, onworkspace:f[1]"
-        "rounding 0, floating:0, onworkspace:f[1]"
-
         # Remove context menu transparency in chromium based apps
         "opaque,class:^()$,title:^()$"
         "noshadow,class:^()$,title:^()$"
         "noblur,class:^()$,title:^()$"
       ];
-
-      # No gaps when only
-      workspace = [
-        "w[t1], gapsout:0, gapsin:0"
-        "w[tg1], gapsout:0, gapsin:0"
-        "f[1], gapsout:0, gapsin:0"
-      ];
     };
 
-      #monitor=DP-3, 2560x1440@170, 0x0, 1
-    #monitor=DP-2, 2560x1440@165, 2560, 1
-    #monitor=HDMI-A-1, 2560x1440@165, 0x0, 1
-    #monitor=,preferred,auto,auto
     extraConfig = "
-      monitor=HDMI-A-1, 2560x1440@170, 0x0, 1
-      monitor=DP-2, 2560x1440@180, 2560x0, 1
-      xwayland {
-        force_zero_scaling = true
+      # General settings
+      general {
+          gaps_in = 5
+          gaps_out = 10
+          border_size = 2
+          col.active_border = rgb(A89984)
+          col.inactive_border = 0x00000000
+          layout = dwindle
+          no_border_on_floating = false
       }
-      experimental {
-        hdr = false
-        wide_color_gamut = false
-        xx_color_management_v4 = true
+
+      # Dwindle layout
+      dwindle {
+          no_gaps_when_only = true
+          pseudotile = yes
+          preserve_split = yes
+          force_split = 0
+          use_active_for_splits = true
       }
+      
+      # Your monitor config can stay here too
+      monitor=HDMI-A-1, 1920x1080@70, -1920x0, 1
+      monitor=DP-3, 2560x1440@170, 0x0, 1
+      monitor=DP-2, 2560x1440@165, 2560x0, 1
     ";
   };
 }

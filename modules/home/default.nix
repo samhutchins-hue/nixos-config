@@ -3,8 +3,10 @@
   username,
   host,
   ...
-}: {
+}:
+{
   imports = [
+    ./ollama.nix # ollama
     ./bat.nix # better cat command
     ./browser.nix # firefox based browser
     ./btop.nix # resouces monitor
@@ -23,7 +25,7 @@
     ./nemo.nix # file manager
     #./nixvim.nix
     ./zathura.nix
-    ./typst.nix # 
+    ./typst.nix
     ./obsidian.nix # note taking
     ./p10k/p10k.nix # terminal status line
     ./packages.nix # other packages
@@ -38,10 +40,13 @@
     ./xdg-mimes.nix # xdg config
     ./yazi.nix # terminal file manager
     ./zsh # shell
+    ./nushell # shell
+    ./visual.nix # vscode for jupyter notebooks
+    ./direnv.nix # direnv for nix
 
-    ./emacs.nix
-    ./neovim
+    ##./emacs.nix
     #./neovim.nix
+    ./nvim
     #./nvf-configuration.nix
 
     ./ghostty.nix
