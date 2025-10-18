@@ -136,9 +136,9 @@ _: {
         "$mainMod, F1, exec, show-keybinds"
 
         # keybindings
-        "$mainMod, Return, exec, ghostty"
-        "ALT, Return, exec, [float; center; size 950 650] ghostty"
-        "$mainMod SHIFT, Return, exec, [fullscreen] ghostty"
+        "$mainMod, Return, exec, kitty"
+        "ALT, Return, exec, [float; center; size 950 650] kitty"
+        "$mainMod SHIFT, Return, exec, [fullscreen] kitty"
         "$mainMod, B, exec, hyprctl dispatch exec '[workspace 1 silent] firefox'"
         "$mainMod, Q, killactive,"
         "$mainMod, F, fullscreen, 0"
@@ -348,9 +348,9 @@ _: {
       ];
     };
 
+    # monitor=HDMI-A-1, 1920x1080@70, -1920x0, 1
     extraConfig = "
-      monitor=HDMI-A-1, 1920x1080@70, -1920x0, 1
-      monitor=DP-3, 2560x1440@170, 0x0, 1
+      monitor=DP-1, 2560x1440@170, 0x0, 1
       monitor=DP-2, 2560x1440@165, 2560x0, 1
     ";
   };

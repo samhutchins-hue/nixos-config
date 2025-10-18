@@ -1,28 +1,12 @@
 { pkgs, config, ... }:
-let 
-  monolisa = pkgs.callPackage ../../pkgs/monolisa/monolisa.nix {}; 
-  monolisa-nerd = pkgs.callPackage ../../pkgs/monolisa/monolisa-nerd.nix { inherit monolisa; }; 
+let
+  monolisa = pkgs.callPackage ../../pkgs/monolisa/monolisa.nix { };
+  monolisa-nerd = pkgs.callPackage ../../pkgs/monolisa/monolisa-nerd.nix { inherit monolisa; };
 in
 {
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
-      #(nerdfonts.override { fonts = [
-      #  "JetBrainsMono"
-      #  "FiraCode"
-      #  "CascadiaCode"
-      #  "NerdFontsSymbolsOnly"
-      #]; })
-      #twemoji-color-font
-      #noto-fonts-emoji
-      #fantasque-sans-mono
-      #maple-mono
-      ## monolisa
-      ## monolisa-nerd
     pkgs.nerd-fonts.jetbrains-mono
-    #pkgs.nerd-fonts.firacode
-    #pkgs.nerd-fonts.cascadiacode
-    #pkgs.nerd-fonts.nerdfontssymbolsonly
-    
   ];
 
   gtk = {
@@ -51,7 +35,7 @@ in
       size = 24;
     };
   };
-  
+
   home.pointerCursor = {
     name = "Bibata-Modern-Ice";
     package = pkgs.bibata-cursors;

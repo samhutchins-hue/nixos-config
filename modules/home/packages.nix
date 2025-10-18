@@ -11,8 +11,11 @@ in
       ## system
       bc
       keychain
+      vim
 
       ## CLI utility
+      bottles
+      unrar
       djvu2pdf
       qbittorrent
       leetcode-cli
@@ -148,6 +151,7 @@ in
       inputs.alejandra.defaultPackage.${system}
 
       firefox
+      google-chrome
     ]
   );
 }

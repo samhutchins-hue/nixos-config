@@ -9,7 +9,6 @@
   programs.zsh = {
     shellAliases = {
       # Utils
-      c = "clear";
       cd = "z";
       tt = "gtrash put";
       cat = "bat";
@@ -45,7 +44,7 @@
       psv = "source .venv/bin/activate";
 
       # neovim
-      vim = "nix run github:samhutchins-hue/nixvimtemp";
+      nvim = "nix run github:samhutchins-hue/nixvimtemp";
     };
   };
 }
