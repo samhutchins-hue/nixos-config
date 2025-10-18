@@ -5,58 +5,50 @@
     ./../../modules/core
   ];
 
-  environment.systemPackages = with pkgs; [
-    acpi
-    brightnessctl
-    cpupower-gui
-    powertop
-  ];
-  
-  services = {    
-    power-profiles-daemon.enable = true;
- 
-    upower = {
-      enable = true;
-      percentageLow = 20;
-      percentageCritical = 5;
-      percentageAction = 3;
-      criticalPowerAction = "PowerOff";
-    };
+  # 1. Enable the Fingerprint Reader
+  services.fprintd.enable = true;
+  security.pam.services.login.fprintAuth = true;
+  security.pam.services.sudo.fprintAuth = true;
+  security.pam.services.polkit-1.fprintAuth = true; # For GUI privilege prompts
 
-    tlp.settings = {
-      CPU_ENERGY_PERF_POLICY_ON_AC = "power";
-      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+  # 2. Enable the Trackpad and TrackPoint (often missed!)
+  # The installer's hardware scan can miss this.
+  services.xserver.libinput.enable = true;
 
+  # 3. Wi-Fi Fix (Intel AX200)
+  # This laptop's Wi-Fi card can have connection drop issues.
+  # This option often fixes it.
+  boot.kernelModules = [ "iwlwifi" ];
+  boot.extraModprobeConfig = ''
+    options iwlwifi 11n_disable=8
+  '';
+
+  # 4. AMD-Specific Power Management (TLP)
+  services.tlp = {
+    enable = true;
+    settings = {
+      # Use the modern, efficient AMD driver
+      CPU_SCALING_DRIVER_ON_AC = "amd-pstate";
+      CPU_SCALING_DRIVER_ON_BAT = "amd-pstate";
+
+      # Use 'active' mode for best performance/power balance
+      CPU_SCALING_GOVERNOR_ON_AC = "performance"; # 'performance' in amd-pstate is efficient
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+
+      # Use the built-in platform profiles
+      PLATFORM_PROFILE_ON_AC = "balanced"; # or "performance"
+      PLATFORM_PROFILE_ON_BAT = "low-power";
+
+      # Disable CPU boost on battery to save power
       CPU_BOOST_ON_AC = 1;
-      CPU_BOOST_ON_BAT = 1;
-
-      CPU_HWP_DYN_BOOST_ON_AC = 1;
-      CPU_HWP_DYN_BOOST_ON_BAT = 1;
-
-      PLATFORM_PROFILE_ON_AC = "performance";
-      PLATFORM_PROFILE_ON_BAT = "performance";
-
-      INTEL_GPU_MIN_FREQ_ON_AC=500;
-      INTEL_GPU_MIN_FREQ_ON_BAT=500;
-      # INTEL_GPU_MAX_FREQ_ON_AC=0;
-      # INTEL_GPU_MAX_FREQ_ON_BAT=0;
-      # INTEL_GPU_BOOST_FREQ_ON_AC=0;
-      # INTEL_GPU_BOOST_FREQ_ON_BAT=0;
-
-      # PCIE_ASPM_ON_AC = "default";
+      CPU_BOOST_ON_BAT = 0;
+      
+      # Power-saving for your NVMe SSD
       # PCIE_ASPM_ON_BAT = "powersupersave";
     };
   };
 
-  powerManagement.cpuFreqGovernor = "performance";
-
-  boot = {
-    kernelModules = ["acpi_call"];
-    extraModulePackages = with config.boot.kernelPackages;
-      [
-        acpi_call
-        cpupower
-      ]
-      ++ [pkgs.cpupower-gui];
-  };
+  # Make sure the conflicting daemon is disabled
+  services.power-profiles-daemon.enable = false;
+  powerManagement.cpuFreqGovernor = null;
 }
