@@ -6,7 +6,6 @@
 }:
 {
   imports = [
-    ./ollama.nix # ollama
     ./bat.nix # better cat command
     ./browser.nix # firefox based browser
     ./btop.nix # resouces monitor
@@ -42,6 +41,7 @@
     ./visual.nix # vscode for jupyter notebooks
     ./direnv.nix # direnv for nix
 
+    ./tmux.nix
     ./ghostty.nix
   ];
 }

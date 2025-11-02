@@ -41,7 +41,7 @@ _: {
         accel_profile = "flat";
         force_no_accel = "1";
         kb_layout = "us";
-        kb_options = "grp:alt_caps_toggle";
+        kb_options = "grp:alt_caps_toggle,ctrl:nocaps";
         numlock_by_default = true;
         follow_mouse = 1;
         float_switch_override_focus = 0;
@@ -348,10 +348,8 @@ _: {
       ];
     };
 
-    # monitor=HDMI-A-1, 1920x1080@70, -1920x0, 1
     extraConfig = "
-      monitor=DP-1, 2560x1440@170, 0x0, 1
-      monitor=DP-2, 2560x1440@165, 2560x0, 1
+      monitor=eDP-1, 1920x1080@60, 0x0, 1
     ";
   };
 }

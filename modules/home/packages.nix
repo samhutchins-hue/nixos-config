@@ -14,10 +14,9 @@ in
       vim
 
       ## CLI utility
-      bottles
+      tmux
       unrar
       djvu2pdf
-      qbittorrent
       leetcode-cli
       ani-cli
       binsider
@@ -75,35 +74,22 @@ in
       tty-clock # cli clock
       porsmo
       leetgo
-      kakoune
-      helix
       claude-code
 
       ## GUI Apps
       easyeffects
-      xournalpp
       code-cursor
       stremio
       protonvpn-gui
-      audacity
-      #bleachbit                         # cache cleaner
       gimp
-      #libreoffice
       nix-prefetch-github
-      #obs-studio
       pavucontrol # pulseaudio volume controle (GUI)
-      qalculate-gtk # calculator
       soundwireserver
-      thunderbird
-      vlc
       winetricks
       wineWowPackages.wayland
       zenity
       vesktop
-      miru
       lutris
-      wowup-cf
-      zed-editor
 
       #sql
       sqlx-cli
@@ -151,7 +137,6 @@ in
       inputs.alejandra.defaultPackage.${system}
 
       firefox
-      google-chrome
     ]
   );
 }

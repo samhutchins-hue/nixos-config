@@ -37,7 +37,6 @@
       nix-clean = "nh clean all --keep 5";
       nix-search = "nh search";
       nix-test = "nh os test";
-      #nixvim = "nix run github:samhutchins-hue/nixvimtemp";
 
       # python
       piv = "python -m venv .venv";

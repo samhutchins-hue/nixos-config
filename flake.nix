@@ -32,6 +32,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     spicetify-nix = {
       url = "github:gerg-l/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -53,6 +58,7 @@
     {
       nixpkgs,
       self,
+      nixos-hardware,
       ...
     }@inputs:
     let
@@ -71,7 +77,10 @@
         };
         laptop = nixpkgs.lib.nixosSystem {
           inherit system;
-          modules = [ ./hosts/laptop ];
+          modules = [
+            ./hosts/laptop
+            nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen1
+          ];
           specialArgs = {
             host = "laptop";
             inherit self inputs username;
