@@ -16,15 +16,6 @@
 
     nixvim.url = "github:samhutchins-hue/nixvimtemp";
 
-    caelestia-shell = {
-      url = "github:caelestia-dots/shell";
-      # We let this use its own nixpkgs to avoid build errors
-    };
-    caelestia-cli = {
-      url = "github:caelestia-dots/cli";
-      # We let this use its own nixpkgs to avoid build errors
-    };
-
     hyprland = {
       type = "git";
       url = "https://github.com/hyprwm/Hyprland";
@@ -60,6 +51,15 @@
       url = "github:yazi-rs/plugins";
       flake = false;
     };
+
+    caelestia-shell = {
+      url = "github:caelestia-dots/shell";
+      # inputs.nixpkgs.follows = "nixpkgs";
+    };
+    caelestia-cli = {
+      url = "github:caelestia-dots/cli";
+      #  inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -69,7 +69,6 @@
       nixos-hardware,
       caelestia-shell,
       caelestia-cli,
-      # caelestia-dots, # <-- Make sure this is REMOVED
       ...
     }@inputs:
     let
@@ -108,5 +107,3 @@
       };
     };
 }
-
-

@@ -18,30 +18,34 @@
     ./gnome.nix # gnome apps
     ./gtk.nix # gtk theme
     ./hyprland # window manager
-    ./kitty.nix # terminal
+    #./kitty.nix # terminal
     ./swayosd.nix # brightness / volume wiget
-    ./swaync/swaync.nix # notification deamon
+    #./swaync/swaync.nix # notification deamon
     ./nemo.nix # file manager
     ./zathura.nix
     ./typst.nix
     ./obsidian.nix # note taking
-    ./p10k/p10k.nix # terminal status line
+    #./p10k/p10k.nix # terminal status line
     ./packages.nix # other packages
-    ./rofi.nix # launcher
+    #./rofi.nix # launcher
     ./scripts/scripts.nix # personal scripts
     ./spicetify.nix # spotify client
-    ./starship.nix # shell prompt
+    #./starship.nix # shell prompt
     ./swaylock.nix # lock screen
     ./viewnior.nix # image viewer
-    ./waybar # status bar
+    #./waybar # status bar
     ./waypaper.nix # GUI wallpaper picker
     ./xdg-mimes.nix # xdg config
     ./yazi.nix # terminal file manager
-    ./zsh # shell
+    #./zsh # shell
     ./visual.nix # vscode for jupyter notebooks
     ./direnv.nix # direnv for nix
 
     ./tmux.nix
     ./ghostty.nix
+
+    ./caelestia.nix
+    ./fish.nix
+    ./foot.nix
   ];
 }

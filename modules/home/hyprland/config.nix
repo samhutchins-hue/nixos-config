@@ -1,355 +1,439 @@
 _: {
   wayland.windowManager.hyprland = {
     settings = {
+      # === Caelestia Config: general.conf ===
       general = {
-        gaps_in = 5;
-        gaps_out = 10;
+        gaps_in = 8;
+        gaps_out = 16;
         border_size = 2;
-        "col.active_border" = "rgb(A89984)";
-        "col.inactive_border" = "0x00000000";
+        "col.active_border" = "rgba(00000000)";
+        "col.inactive_border" = "rgba(00000000)";
         layout = "dwindle";
-        "$mainMod" = "SUPER";
+        apply_sens_to_raw = 0;
       };
 
-      dwindle = {
-        pseudotile = "yes";
-        preserve_split = "yes";
+      # === Caelestia Config: decoration.conf ===
+      decoration = {
+        rounding = 16;
+        blur = {
+          enabled = true;
+          xray = false;
+          special = true;
+          ignore_opacity = true;
+          new_optimizations = true;
+          popups = true;
+          input_methods = true;
+          size = 6;
+          passes = 3;
+        };
+        drop_shadow = true;
+        shadow_range = 16;
+        shadow_render_power = 2;
+        "col.shadow" = "rgba(00000055)";
+        "col.shadow_inactive" = "rgba(00000022)";
       };
-      # autostart
-      exec-once = [
-        "systemctl --user import-environment &"
-        "hash dbus-update-activation-environment 2>/dev/null &"
-        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP &"
 
-        "nm-applet &"
-        "poweralertd &"
-        "wl-clip-persist --clipboard both &"
-        "wl-paste --watch cliphist store &"
-        "waybar &"
-        "swaync &"
-        "hyprctl setcursor Bibata-Modern-Ice 24 &"
-        "swww init && swww img $(find ~/Pictures/wallpapers/ -maxdepth 1 -type f) --transition-type none &"
+      # === Caelestia Config: animations.conf ===
+      animations = {
+        enabled = true;
+        bezier = [
+          "linear, 0, 0, 1, 1"
+          "ease, 0.25, 1, 0.25, 1"
+          "easeIn, 0.42, 0, 1, 1"
+          "easeOut, 0, 0, 0.58, 1"
+          "easeInOut, 0.42, 0, 0.58, 1"
+        ];
+        animation = [
+          "windows, 1, 5, easeOut"
+          "windowsIn, 1, 4, easeOut"
+          "windowsOut, 1, 4, easeIn"
+          "border, 1, 10, linear"
+          "fade, 1, 5, easeOut"
+          "workspaces, 1, 5, easeOut, slide"
+        ];
+      };
 
-        "hyprlock"
-
-        ## App auto start
-        # "[workspace 1 silent] zen"
-        # "[workspace 2 silent] kitty"
-      ];
-
+      # === Caelestia Config: input.conf ===
       input = {
-        accel_profile = "flat";
-        force_no_accel = "1";
         kb_layout = "us";
-        kb_options = "grp:alt_caps_toggle,ctrl:nocaps";
-        numlock_by_default = true;
         follow_mouse = 1;
-        float_switch_override_focus = 0;
-        mouse_refocus = 0;
-        sensitivity = 0.000000000;
         touchpad = {
           natural_scroll = true;
         };
+        sensitivity = 0;
+        accel_profile = "flat";
       };
 
+      # === Caelestia Config: gestures.conf ===
+      gestures = {
+        workspace_swipe = true;
+        workspace_swipe_fingers = 3;
+        workspace_swipe_distance = 300;
+        workspace_swipe_invert = true;
+      };
+
+      # === Caelestia Config: misc.conf ===
       misc = {
-        disable_autoreload = true;
         disable_hyprland_logo = true;
-        always_follow_on_dnd = true;
-        layers_hog_keyboard_focus = true;
-        animate_manual_resizes = false;
+        disable_splash_rendering = true;
+        vfr = true;
         enable_swallow = true;
+        swallow_regex = "^(foot)$";
         focus_on_activate = true;
-        new_window_takes_over_fullscreen = 2;
-        middle_click_paste = false;
       };
 
-      master = {
-        new_status = "master";
-        special_scale_factor = 1;
-        # no_gaps_when_only = false;
+      # === Caelestia Config: hyprland.conf ===
+      dwindle = {
+        pseudotile = true;
+        preserve_split = true;
+        force_split = 2;
+        no_gaps_when_only = false;
       };
 
-      decoration = {
-        rounding = 10;
-        # active_opacity = 0.90;
-        # inactive_opacity = 0.90;
-        # fullscreen_opacity = 1.0;
-
-        blur = {
-          enabled = true;
-          size = 4;
-          passes = 2;
-          # size = 4;
-          # passes = 2;
-          brightness = 1;
-          contrast = 1.400;
-          ignore_opacity = true;
-          noise = 0;
-          new_optimizations = true;
-          xray = true;
-        };
-
-        shadow = {
-          enabled = true;
-
-          ignore_window = true;
-          offset = "0 2";
-          range = 20;
-          render_power = 3;
-          color = "rgba(00000055)";
-        };
-      };
-
-      animations = {
-        enabled = true;
-
-        bezier = [
-          "fluent_decel, 0, 0.2, 0.4, 1"
-          "easeOutCirc, 0, 0.55, 0.45, 1"
-          "easeOutCubic, 0.33, 1, 0.68, 1"
-          "fade_curve, 0, 0.55, 0.45, 1"
-        ];
-
-        animation = [
-          # name, enable, speed, curve, style
-
-          # Windows
-          "windowsIn,   0, 4, easeOutCubic,  popin 20%" # window open
-          "windowsOut,  0, 4, fluent_decel,  popin 80%" # window close.
-          "windowsMove, 1, 2, fluent_decel, slide" # everything in between, moving, dragging, resizing.
-
-          # Fade
-          "fadeIn,      1, 3,   fade_curve" # fade in (open) -> layers and windows
-          "fadeOut,     1, 3,   fade_curve" # fade out (close) -> layers and windows
-          "fadeSwitch,  0, 1,   easeOutCirc" # fade on changing activewindow and its opacity
-          "fadeShadow,  1, 10,  easeOutCirc" # fade on changing activewindow for shadows
-          "fadeDim,     1, 4,   fluent_decel" # the easing of the dimming of inactive windows
-          # "border,      1, 2.7, easeOutCirc"  # for animating the border's color switch speed
-          # "borderangle, 1, 30,  fluent_decel, once" # for animating the border's gradient angle - styles: once (default), loop
-          "workspaces,  1, 4,   easeOutCubic, fade" # styles: slide, slidevert, fade, slidefade, slidefadevert
-        ];
-      };
-
-      bind = [
-        # show keybinds list
-        "$mainMod, F1, exec, show-keybinds"
-
-        # keybindings
-        "$mainMod, Return, exec, kitty"
-        "ALT, Return, exec, [float; center; size 950 650] kitty"
-        "$mainMod SHIFT, Return, exec, [fullscreen] kitty"
-        "$mainMod, B, exec, hyprctl dispatch exec '[workspace 1 silent] firefox'"
-        "$mainMod, Q, killactive,"
-        "$mainMod, F, fullscreen, 0"
-        "$mainMod SHIFT, F, fullscreen, 1"
-        "$mainMod, Space, exec, toggle_float"
-        "$mainMod, D, exec, rofi -show drun || pkill rofi"
-        "$mainMod SHIFT, D, exec, webcord --enable-features=UseOzonePlatform --ozone-platform=wayland"
-        "$mainMod SHIFT, S, exec, hyprctl dispatch exec '[workspace 5 silent] SoundWireServer'"
-        "$mainMod, Escape, exec, swaylock"
-        "ALT, Escape, exec, hyprlock"
-        "$mainMod SHIFT, Escape, exec, power-menu"
-        "$mainMod, P, pseudo,"
-        "$mainMod, X, togglesplit,"
-        "$mainMod, T, exec, toggle_oppacity"
-        "$mainMod, E, exec, hyprctl dispatch exec '[float; center; size 1111 700] nemo'"
-        "$mainMod SHIFT, E, exec, hyprctl dispatch exec '[float; center; size 1111 700] ghostty yazi'"
-        "$mainMod SHIFT, B, exec, toggle_waybar"
-        "$mainMod, C ,exec, hyprpicker -a"
-        "$mainMod, W,exec, hyprctl dispatch exec '[float; center; size 925 615] waypaper'"
-        "$mainMod SHIFT, W,exec, wallpaper-picker"
-        "$mainMod, N, exec, swaync-client -t -sw"
-        # "$mainMod SHIFT, W, exec, vm-start"
-
-        # screensho
-        "$mainMod, s, exec, screenshot --copy"
-        "$mainMod, Print, exec, screenshot --save"
-        "$mainMod SHIFT, Print, exec, screenshot --swappy"
-
-        # switch focus
-        "$mainMod, left, movefocus, l"
-        "$mainMod, right, movefocus, r"
-        "$mainMod, up, movefocus, u"
-        "$mainMod, down, movefocus, d"
-        "$mainMod, h, movefocus, l"
-        "$mainMod, j, movefocus, d"
-        "$mainMod, k, movefocus, u"
-        "$mainMod, l, movefocus, r"
-
-        # switch workspace
-        "$mainMod, 1, workspace, 1"
-        "$mainMod, 2, workspace, 2"
-        "$mainMod, 3, workspace, 3"
-        "$mainMod, 4, workspace, 4"
-        "$mainMod, 5, workspace, 5"
-        "$mainMod, 6, workspace, 6"
-        "$mainMod, 7, workspace, 7"
-        "$mainMod, 8, workspace, 8"
-        "$mainMod, 9, workspace, 9"
-        "$mainMod, 0, workspace, 10"
-
-        # same as above, but switch to the workspace
-        "$mainMod SHIFT, 1, movetoworkspacesilent, 1" # movetoworkspacesilent
-        "$mainMod SHIFT, 2, movetoworkspacesilent, 2"
-        "$mainMod SHIFT, 3, movetoworkspacesilent, 3"
-        "$mainMod SHIFT, 4, movetoworkspacesilent, 4"
-        "$mainMod SHIFT, 5, movetoworkspacesilent, 5"
-        "$mainMod SHIFT, 6, movetoworkspacesilent, 6"
-        "$mainMod SHIFT, 7, movetoworkspacesilent, 7"
-        "$mainMod SHIFT, 8, movetoworkspacesilent, 8"
-        "$mainMod SHIFT, 9, movetoworkspacesilent, 9"
-        "$mainMod SHIFT, 0, movetoworkspacesilent, 10"
-        "$mainMod CTRL, c, movetoworkspace, empty"
-
-        # window control
-        "$mainMod SHIFT, left, movewindow, l"
-        "$mainMod SHIFT, right, movewindow, r"
-        "$mainMod SHIFT, up, movewindow, u"
-        "$mainMod SHIFT, down, movewindow, d"
-        "$mainMod SHIFT, h, movewindow, l"
-        "$mainMod SHIFT, j, movewindow, d"
-        "$mainMod SHIFT, k, movewindow, u"
-        "$mainMod SHIFT, l, movewindow, r"
-
-        "$mainMod CTRL, left, resizeactive, -80 0"
-        "$mainMod CTRL, right, resizeactive, 80 0"
-        "$mainMod CTRL, up, resizeactive, 0 -80"
-        "$mainMod CTRL, down, resizeactive, 0 80"
-        "$mainMod CTRL, h, resizeactive, -80 0"
-        "$mainMod CTRL, j, resizeactive, 0 80"
-        "$mainMod CTRL, k, resizeactive, 0 -80"
-        "$mainMod CTRL, l, resizeactive, 80 0"
-
-        "$mainMod ALT, left, moveactive,  -80 0"
-        "$mainMod ALT, right, moveactive, 80 0"
-        "$mainMod ALT, up, moveactive, 0 -80"
-        "$mainMod ALT, down, moveactive, 0 80"
-        "$mainMod ALT, h, moveactive,  -80 0"
-        "$mainMod ALT, j, moveactive, 0 80"
-        "$mainMod ALT, k, moveactive, 0 -80"
-        "$mainMod ALT, l, moveactive, 80 0"
-
-        # media and volume controls
-        # ",XF86AudioMute,exec, pamixer -t"
-        ",XF86AudioPlay,exec, playerctl play-pause"
-        ",XF86AudioNext,exec, playerctl next"
-        ",XF86AudioPrev,exec, playerctl previous"
-        ",XF86AudioStop,exec, playerctl stop"
-
-        "$mainMod, mouse_down, workspace, e-1"
-        "$mainMod, mouse_up, workspace, e+1"
-
-        # clipboard manager
-        "$mainMod, V, exec, cliphist list | rofi -dmenu -theme-str 'window {width: 50%;}' | cliphist decode | wl-copy"
-      ];
-
-      # # binds active in lockscreen
-      # bindl = [
-      #   # laptop brigthness
-      #   ",XF86MonBrightnessUp, exec, brightnessctl set 5%+"
-      #   ",XF86MonBrightnessDown, exec, brightnessctl set 5%-"
-      #   "$mainMod, XF86MonBrightnessUp, exec, brightnessctl set 100%+"
-      #   "$mainMod, XF86MonBrightnessDown, exec, brightnessctl set 100%-"
-      # ];
-
-      # # binds that repeat when held
-      # binde = [
-      #   ",XF86AudioRaiseVolume,exec, pamixer -i 2"
-      #   ",XF86AudioLowerVolume,exec, pamixer -d 2"
-      # ];
-
-      # mouse binding
-      bindm = [
-        "$mainMod, mouse:272, movewindow"
-        "$mainMod, mouse:273, resizewindow"
-      ];
-
-      # windowrule
-      windowrule = [
-        "float,class:Viewnior"
-        "center,class:Viewnior"
-        "size 1200 800,class:Viewnior"
-        "float,class:imv"
-        "center,class:imv"
-        "size 1200 725,class:imv"
-        "float,class:mpv"
-        "center,class:mpv"
-        "size 1200 725,class:mpv"
-        "pin,class:rofi"
-        "pin,class:waypaper"
-        "tile, class:neovide"
-        "idleinhibit focus,class:mpv"
-        "float,class:udiskie"
-        "float,title:^(Transmission)$"
-        "float,title:^(Volume Control)$"
-        "float,title:^(Firefox — Sharing Indicator)$"
-        "move 0 0,title:^(Firefox — Sharing Indicator)$"
-        "size 700 450,title:^(Volume Control)$"
-        "move 40 55%,title:^(Volume Control)$"
-      ];
-
-      # windowrulev2
-      windowrulev2 = [
-        "float, title:^(Picture-in-Picture)$"
-        "opacity 1.0 override 1.0 override, title:^(Picture-in-Picture)$"
-        "pin, title:^(Picture-in-Picture)$"
-        "opacity 1.0 override 1.0 override, title:^(.*imv.*)$"
-        "opacity 1.0 override 1.0 override, title:^(.*mpv.*)$"
-        "opacity 1.0 override 1.0 override, class:(Aseprite)"
-        "opacity 1.0 override 1.0 override, class:(Unity)"
-        "opacity 1.0 override 1.0 override, class:(zen)"
-        "opacity 1.0 override 1.0 override, class:(evince)"
-        "workspace 1, class:^(zen)$"
-        "workspace 3, class:^(evince)$"
-        "workspace 4, class:^(Gimp-2.10)$"
-        "workspace 4, class:^(Aseprite)$"
-        "workspace 5, class:^(Audacious)$"
-        "workspace 5, class:^(Spotify)$"
-        "workspace 8, class:^(com.obsproject.Studio)$"
-        "workspace 10, class:^(discord)$"
-        "workspace 10, class:^(WebCord)$"
-        "idleinhibit focus, class:^(mpv)$"
-        "idleinhibit fullscreen, class:^(firefox)$"
-        "float,class:^(waypaper)$"
-        "float,class:^(zenity)$"
-        "center,class:^(zenity)$"
-        "size 850 500,class:^(zenity)$"
-        "float,class:^(org.gnome.FileRoller)$"
-        "center,class:^(org.gnome.FileRoller)$"
-        "size 850 500,class:^(org.gnome.FileRoller)$"
-        "size 850 500,title:^(File Upload)$"
-        "float,class:^(pavucontrol)$"
-        "float,class:^(SoundWireServer)$"
-        "float,class:^(.sameboy-wrapped)$"
-        "float,class:^(file_progress)$"
-        "float,class:^(confirm)$"
-        "float,class:^(dialog)$"
-        "float,class:^(download)$"
-        "float,class:^(notification)$"
-        "float,class:^(error)$"
-        "float,class:^(confirmreset)$"
-        "float,title:^(Open File)$"
-        "float,title:^(File Upload)$"
-        "float,title:^(branchdialog)$"
-        "float,title:^(Confirm to replace files)$"
-        "float,title:^(File Operation Progress)$"
-
-        "opacity 0.0 override,class:^(xwaylandvideobridge)$"
-        "noanim,class:^(xwaylandvideobridge)$"
-        "noinitialfocus,class:^(xwaylandvideobridge)$"
-        "maxsize 1 1,class:^(xwaylandvideobridge)$"
-        "noblur,class:^(xwaylandvideobridge)$"
-
-        # Remove context menu transparency in chromium based apps
-        "opaque,class:^()$,title:^()$"
-        "noshadow,class:^()$,title:^()$"
-        "noblur,class:^()$,title:^()$"
+      # === Caelestia Config: execs.conf ===
+      # We let systemd handle caelestia, so we only run the rest
+      exec-once = [
+        "hyprctl setcursor catppuccin-mocha-mauve-cursors 24"
+        "wl-paste --watch cliphist store"
+        "swww init"
       ];
     };
 
-    extraConfig = "
-      monitor=eDP-1, 1920x1080@60, 0x0, 1
-    ";
+    # === Caelestia variables, keybinds, and rules ===
+    extraConfig = ''
+      # Source: hypr/variables.conf
+      # (Modified to use your apps: foot, firefox, code, nemo)
+      $mainMod = SUPER
+      $scripts = $HOME/.config/hypr/scripts
+
+      # Apps
+      $terminal = "foot"
+      $browser = "firefox"
+      $editor = "code"
+      $fileExplorer = "nemo"
+
+      # Caelestia binds
+      $kbSession = Ctrl+Alt, Delete
+      $kbClearNotifs = Ctrl+Alt, C
+      $kbShowPanels = Ctrl+Super, S
+      $kbLock = Ctrl+Alt, L
+      $kbRestoreLock = Alt, F1
+
+      # Workspaces
+      $kbGoToWs = Super
+      $kbGoToWsGroup = Ctrl+Super
+      $kbPrevWs = Super, left
+      $kbNextWs = Super, right
+      $kbToggleSpecialWs = Super, S
+
+      # Move window
+      $kbMoveWinToWs = Super+Shift
+      $kbMoveWinToWsGroup = Ctrl+Super+Shift
+      $kbMoveWindow = Super, mouse:272
+      $kbResizeWindow = Super, mouse:273
+
+      # Window groups
+      $kbWindowGroupCycleNext = Super, Comma
+      $kbWindowGroupCyclePrev = Super, Period
+      $kbToggleGroup = Super+Shift, G
+      $kbUngroup = Super+Alt, G
+
+      # Window actions
+      $kbWindowPip = Super+Shift, P
+      $kbPinWindow = Super, P
+      $kbWindowFullscreen = Super, F
+      $kbWindowBorderedFullscreen = Super+Shift, F
+      $kbToggleWindowFloating = Super, Space
+      $kbCloseWindow = Super, Q
+
+      # Toggles
+      $kbSystemMonitor = Super+Alt, T
+      $kbMusic = Super+Alt, M
+      $kbCommunication = Super+Alt, C
+      $kbTodo = Super+Alt, N
+
+      # Volume
+      $volumeStep = 5
+
+      # Source: hypr/hyprland/group.conf
+      group {
+          groupbar {
+              col.active = rgba(ca9ee6ee)
+              col.inactive = rgba(a5adceee)
+          }
+      }
+
+      # Source: hypr/hyprland/keybinds.conf
+      exec = hyprctl dispatch submap global
+      submap = global
+
+      # ## Shell keybinds
+      # Launcher
+      bindi = Super, Super_L, global, caelestia:launcher
+      bindin = Super, catchall, global, caelestia:launcherInterrupt
+      bindin = Super, mouse:272, global, caelestia:launcherInterrupt
+      bindin = Super, mouse:273, global, caelestia:launcherInterrupt
+      bindin = Super, mouse:274, global, caelestia:launcherInterrupt
+      bindin = Super, mouse:275, global, caelestia:launcherInterrupt
+      bindin = Super, mouse:276, global, caelestia:launcherInterrupt
+      bindin = Super, mouse:277, global, caelestia:launcherInterrupt
+      bindin = Super, mouse_up, global, caelestia:launcherInterrupt
+      bindin = Super, mouse_down, global, caelestia:launcherInterrupt
+
+      # Misc
+      bind = $kbSession, global, caelestia:session
+      bindl = $kbClearNotifs, global, caelestia:clearNotifs
+      bind = $kbShowPanels, global, caelestia:showall
+      bind = $kbLock, global, caelestia:lock
+
+      # Restore lock
+      bindl = $kbRestoreLock, exec, caelestia shell -d
+      bindl = $kbRestoreLock, global, caelestia:lock
+
+      # Brightness
+      bindl = , XF86MonBrightnessUp, global, caelestia:brightnessUp
+      bindl = , XF86MonBrightnessDown, global, caelestia:brightnessDown
+
+      # Media
+      bindl = Ctrl+Super, Space, global, caelestia:mediaToggle
+      bindl = , XF86AudioPlay, global, caelestia:mediaToggle
+      bindl = , XF86AudioPause, global, caelestia:mediaToggle
+      bindl = Ctrl+Super, Equal, global, caelestia:mediaNext
+      bindl = , XF86AudioNext, global, caelestia:mediaNext
+      bindl = Ctrl+Super, Minus, global, caelestia:mediaPrev
+      bindl = , XF86AudioPrev, global, caelestia:mediaPrev
+      bindl = , XF86AudioStop, global, caelestia:mediaStop
+
+      # Kill/restart
+      bindr = Ctrl+Super+Shift, R, exec, qs -c caelestia kill
+      bindr = Ctrl+Super+Alt, R, exec, qs -c caelestia kill; caelestia shell -d
+
+      # Go to workspace #
+      $wsaction = $scripts/wsaction.fish
+      bind = $kbGoToWs, 1, exec, $wsaction workspace 1
+      bind = $kbGoToWs, 2, exec, $wsaction workspace 2
+      bind = $kbGoToWs, 3, exec, $wsaction workspace 3
+      bind = $kbGoToWs, 4, exec, $wsaction workspace 4
+      bind = $kbGoToWs, 5, exec, $wsaction workspace 5
+      bind = $kbGoToWs, 6, exec, $wsaction workspace 6
+      bind = $kbGoToWs, 7, exec, $wsaction workspace 7
+      bind = $kbGoToWs, 8, exec, $wsaction workspace 8
+      bind = $kbGoToWs, 9, exec, $wsaction workspace 9
+      bind = $kbGoToWs, 0, exec, $wsaction workspace 10
+      # Go to workspace group #
+      bind = $kbGoToWsGroup, 1, exec, $wsaction -g workspace 1
+      bind = $kbGoToWsGroup, 2, exec, $wsaction -g workspace 2
+      bind = $kbGoToWsGroup, 3, exec, $wsaction -g workspace 3
+      bind = $kbGoToWsGroup, 4, exec, $wsaction -g workspace 4
+      bind = $kbGoToWsGroup, 5, exec, $wsaction -g workspace 5
+      bind = $kbGoToWsGroup, 6, exec, $wsaction -g workspace 6
+      bind = $kbGoToWsGroup, 7, exec, $wsaction -g workspace 7
+      bind = $kbGoToWsGroup, 8, exec, $wsaction -g workspace 8
+      bind = $kbGoToWsGroup, 9, exec, $wsaction -g workspace 9
+      bind = $kbGoToWsGroup, 0, exec, $wsaction -g workspace 10
+      # Go to workspace -1/+1
+      bind = Super, mouse_down, workspace, -1
+      bind = Super, mouse_up, workspace, +1
+      binde = $kbPrevWs, workspace, -1
+      binde = $kbNextWs, workspace, +1
+      binde = Super, Page_Up, workspace, -1
+      binde = Super, Page_Down, workspace, +1
+      # Go to workspace group -1/+1
+      bind = Ctrl+Super, mouse_down, workspace, -10
+      bind = Ctrl+Super, mouse_up, workspace, +10
+      # Toggle special workspace
+      bind = $kbToggleSpecialWs, exec, caelestia toggle specialws
+
+      # Move window to workspace #
+      bind = $kbMoveWinToWs, 1, exec, $wsaction movetoworkspace 1
+      bind = $kbMoveWinToWs, 2, exec, $wsaction movetoworkspace 2
+      bind = $kbMoveWinToWs, 3, exec, $wsaction movetoworkspace 3
+      bind = $kbMoveWinToWs, 4, exec, $wsaction movetoworkspace 4
+      bind = $kbMoveWinToWs, 5, exec, $wsaction movetoworkspace 5
+      bind = $kbMoveWinToWs, 6, exec, $wsaction movetoworkspace 6
+      bind = $kbMoveWinToWs, 7, exec, $wsaction movetoworkspace 7
+      bind = $kbMoveWinToWs, 8, exec, $wsaction movetoworkspace 8
+      bind = $kbMoveWinToWs, 9, exec, $wsaction movetoworkspace 9
+      bind = $kbMoveWinToWs, 0, exec, $wsaction movetoworkspace 10
+      # Move window to workspace group #
+      bind = $kbMoveWinToWsGroup, 1, exec, $wsaction -g movetoworkspace 1
+      bind = $kbMoveWinToWsGroup, 2, exec, $wsaction -g movetoworkspace 2
+      bind = $kbMoveWinToWsGroup, 3, exec, $wsaction -g movetoworkspace 3
+      bind = $kbMoveWinToWsGroup, 4, exec, $wsaction -g movetoworkspace 4
+      bind = $kbMoveWinToWsGroup, 5, exec, $wsaction -g movetoworkspace 5
+      bind = $kbMoveWinToWsGroup, 6, exec, $wsaction -g movetoworkspace 6
+      bind = $kbMoveWinToWsGroup, 7, exec, $wsaction -g movetoworkspace 7
+      bind = $kbMoveWinToWsGroup, 8, exec, $wsaction -g movetoworkspace 8
+      bind = $kbMoveWinToWsGroup, 9, exec, $wsaction -g movetoworkspace 9
+      bind = $kbMoveWinToWsGroup, 0, exec, $wsaction -g movetoworkspace 10
+      # Move window to workspace -1/+1
+      binde = Super+Alt, Page_Up, movetoworkspace, -1
+      binde = Super+Alt, Page_Down, movetoworkspace, +1
+      bind = Super+Alt, mouse_down, movetoworkspace, -1
+      bind = Super+Alt, mouse_up, movetoworkspace, +1
+      binde = Ctrl+Super+Shift, right, movetoworkspace, +1
+      binde = Ctrl+Super+Shift, left, movetoworkspace, -1
+      # Move window to/from special workspace
+      bind = Ctrl+Super+Shift, up, movetoworkspace, special:special
+      bind = Ctrl+Super+Shift, down, movetoworkspace, e+0
+      bind = Super+Alt, S, movetoworkspace, special:special
+
+      # Window groups
+      binde = $kbWindowGroupCycleNext, cyclenext, activewindow
+      binde = $kbWindowGroupCyclePrev, cyclenext, prev, activewindow
+      binde = Ctrl+Alt, Tab, changegroupactive, f
+      binde = Ctrl+Shift+Alt, Tab, changegroupactive, b
+      bind = $kbToggleGroup, togglegroup
+      bind = $kbUngroup, moveoutofgroup
+      bind = Super+Shift, Comma, lockactivegroup, toggle
+
+      # Window actions
+      bind = Super, left, movefocus, l
+      bind = Super, right, movefocus, r
+      bind = Super, up, movefocus, u
+      bind = Super, down, movefocus, d
+      bind = Super+Shift, left, movewindow, l
+      bind = Super+Shift, right, movewindow, r
+      bind = Super+Shift, up, movewindow, u
+      bind = Super+Shift, down, movewindow, d
+      binde = Super, Minus, splitratio, -0.1
+      binde = Super, Equal, splitratio, 0.1
+      bindm = Super, mouse:272, movewindow
+      bindm = $kbMoveWindow, movewindow
+      bindm = Super, mouse:273, resizewindow
+      bindm = $kbResizeWindow, resizewindow
+      bind = Ctrl+Super, Backslash, centerwindow, 1
+      bind = Ctrl+Super+Alt, Backslash, resizeactive, exact 55% 70%
+      bind = Ctrl+Super+Alt, Backslash, centerwindow, 1
+      bind = $kbWindowPip, exec, caelestia resizer pip # Move window to picture-in-picture mode
+      bind = $kbPinWindow, pin
+      bind = $kbWindowFullscreen, fullscreen, 0
+      bind = $kbWindowBorderedFullscreen, fullscreen, 1 # Fullscreen with borders
+      bind = $kbToggleWindowFloating, togglefloating,
+      bind = $kbCloseWindow, killactive,
+
+      # Special workspace toggles
+      bind = $kbSystemMonitor, exec, caelestia toggle sysmon
+      bind = $kbMusic, exec, caelestia toggle music
+      bind = $kbCommunication, exec, caelestia toggle communication
+      bind = $kbTodo, exec, caelestia toggle todo
+
+      # Apps
+      bind = $kbTerminal, exec, app2unit -- $terminal
+      bind = $kbBrowser, exec, app2unit -- $browser
+      bind = $kbEditor, exec, app2unit -- $editor
+      bind = Super, G, exec, app2unit -- github-desktop
+      bind = $kbFileExplorer, exec, app2unit -- $fileExplorer
+      bind = Super+Alt, E, exec, app2unit -- nemo
+      bind = Ctrl+Alt, Escape, exec, app2unit -- qps
+      bind = Ctrl+Alt, V, exec, app2unit -- pavucontrol
+
+      # Utilities
+      bindl = , Print, exec, caelestia screenshot # Full screen capture > clipboard
+      bind = Super+Shift, S, global, caelestia:screenshotFreeze # Capture region (freeze)
+      bind = Super+Shift+Alt, S, global, caelestia:screenshot # Capture region
+      bind = Super+Alt, R, exec, caelestia record -s # Record screen with sound
+      bind = Ctrl+Alt, R, exec, caelestia record # Record screen
+      bind = Super+Shift+Alt, R, exec, caelestia record -r # Record region
+      bind = Super+Shift, C, exec, hyprpicker -a # Colour picker
+
+      # Volume
+      bindl = , XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+      bindl = Super+Shift, M, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+      bindle = , XF86AudioRaiseVolume, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ 0; wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ $volumeStep%+
+      bindle = , XF86AudioLowerVolume, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ 0; wpctl set-volume @DEFAULT_AUDIO_SINK@ $volumeStep%-
+
+      # Sleep
+      bind = Super+Shift, L, exec, systemctl suspend-then-hibernate
+
+      # Clipboard and emoji picker
+      bind = Super, V, exec, pkill fuzzel || caelestia clipboard
+      bind = Super+Alt, V, exec, pkill fuzzel || caelestia clipboard -d
+      bind = Super, Period, exec, pkill fuzzel || caelestia emoji -p
+      bindl = Ctrl+Shift+Alt, V, exec, sleep 0.5s && ydotool type -d 1 "$(cliphist list | head -1 | cliphist decode)" # Alternate paste
+
+      # Testing
+      bindl = Super+Alt, f12, exec, notify-send -u low -i dialog-information-symbolic 'Test notification' "Here's a really long message to test truncation and wrapping\nYou can middle click or flick this notification to dismiss it!" -a 'Shell' -A "Test1=I got it!" -A "Test2=Another action"
+      
+      # Source: hypr/hyprland/rules.conf
+      # See https://wiki.hyprland.org/Configuring/Window-Rules/
+      # Example windowrule v1
+      # windowrule = float, ^(kitty-calc)$
+      # Example windowrule v2
+      # windowrulev2 = float, class:^(kitty-calc)$
+
+      windowrulev2 = suppressevent maximize, class:.* # Allow apps to maximize
+
+      # Float
+      windowrulev2 = float, class:^(zenity)$
+      windowrulev2 = float, class:^(thunar)$
+      windowrulev2 = float, class:^(nemo)$
+      windowrulev2 = float, class:^(file-roller)$
+      windowrulev2 = float, class:^(pavucontrol)$
+      windowrulev2 = float, class:^(org\.kde\.polkit-kde-authentication-agent-1)$
+      windowrulev2 = float, class:^(qt5ct)$
+      windowrulev2 = float, class:^(qt6ct)$
+      windowrulev2 = float, class:^(nwg-look)$
+      windowrulev2 = float, class:^(org\.gnome\.Characters)$
+      windowrulev2 = float, class:^(org\.gnome\.Loupe)$
+      windowrulev2 = float, class:^(org\.gnome\.baobab)$
+      windowrulev2 = float, class:^(org\.gnome\.Calculator)$
+      windowrulev2 = float, class:^(org\.gnome\.DiskUtility)$
+      windowrulev2 = float, class:^(org\.gnome\.SystemMonitor)$
+      windowrulev2 = float, class:^(org\.gnome\.font-viewer)$
+      windowrulev2 = float, class:^(appimagelauncher-lite)$
+      windowrulev2 = float, class:^(yad)$
+      windowrulev2 = float, class:^(org\.pipewire\.Helvum)$
+      windowrulev2 = float, class:^(github-desktop)$
+      windowrulev2 = float, class:^(imv)$
+
+      # Opacity
+      windowrulev2 = opacity 0.85 0.7, class:^(foot)$
+
+      # Size
+      windowrulev2 = size 40% 40%, class:^(zenity)$
+      windowrulev2 = size 40% 40%, class:^(qt5ct)$
+      windowrulev2 = size 40% 40%, class:^(qt6ct)$
+      windowrulev2 = size 40% 40%, class:^(nwg-look)$
+      windowrulev2 = size 50% 50%, class:^(thunar)$
+      windowrulev2 = size 50% 50%, class:^(nemo)$
+      windowrulev2 = size 50% 50%, class:^(file-roller)$
+      windowrulev2 = size 50% 50%, class:^(org\.gnome\.Characters)$
+      windowrulev2 = size 50% 50%, class:^(org\.gnome\.Loupe)$
+      windowrulev2 = size 50% 50%, class:^(org\.gnome\.baobab)$
+      windowrulev2 = size 50% 50%, class:^(org\.gnome\.Calculator)$
+      windowrulev2 = size 50% 50%, class:^(org\.gnome\.DiskUtility)$
+      windowrulev2 = size 50% 50%, class:^(org\.gnome\.SystemMonitor)$
+      windowrulev2 = size 50% 50%, class:^(org\.gnome\.font-viewer)$
+      windowrulev2 = size 50% 50%, class:^(appimagelauncher-lite)$
+      windowrulev2 = size 50% 50%, class:^(yad)$
+      windowrulev2 = size 50% 50%, class:^(org\.pipewire\.Helvum)$
+      windowrulev2 = size 70% 70%, class:^(github-desktop)$
+
+      # Idle inhibit
+      windowrulev2 = idleinhibit focus, class:^(mpv)$
+      windowrulev2 = idleinhibit focus, class:^(youtube-music-desktop-app)$
+      windowrulev2 = idleinhibit focus, class:^(YouTube Music)$
+      windowrulev2 = idleinhibit focus, class:^(Cider)$
+      windowrulev2 = idleinhibit focus, class:^(Brave-browser)$
+      windowrulev2 = idleinhibit focus, class:^(firefox)$
+      windowrulev2 = idleinhibit focus, class:^(zen)$
+      windowrulev2 = idleinhibit focus, class:^(floorp)$
+
+      # Special workspace
+      windowrulev2 = workspace special:sysmon, class:^(foot)$, title:^(btop)$
+      windowrulev2 = workspace special:music, class:^(youtube-music-desktop-app)$
+      windowrulev2 = workspace special:music, class:^(YouTube Music)$
+      windowrulev2 = workspace special:music, class:^(Cider)$
+      windowrulev2 = workspace special:music, class:^(spotify)$
+      windowrulev2 = workspace special:communication, class:^(discord)$
+      windowrulev2 = workspace special:communication, class:^(vesktop)$
+      windowrulev2 = workspace special:communication, class:^(Signal)$
+      windowrulev2 = workspace special:communication, class:^(WebCord)$
+      windowrulev2 = workspace special:todo, class:^(ticktick)$
+      windowrulev2 = workspace special:todo, class:^(Todoist)$
+    '';
   };
 }
+
+

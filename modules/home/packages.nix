@@ -7,6 +7,7 @@ in
     with pkgs;
     [
       _2048
+      libnotify
 
       ## system
       bc
