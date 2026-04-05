@@ -11,11 +11,7 @@
   security.pam.services.sudo.fprintAuth = true;
   security.pam.services.polkit-1.fprintAuth = true; # For GUI privilege prompts
 
-  # 2. Enable the Trackpad and TrackPoint (often missed!)
-  # The installer's hardware scan can miss this.
-  services.xserver.libinput.enable = true;
-
-  # 3. Wi-Fi Fix (Intel AX200)
+  # 2. Wi-Fi Fix (Intel AX200)
   # This laptop's Wi-Fi card can have connection drop issues.
   # This option often fixes it.
   boot.kernelModules = [ "iwlwifi" ];

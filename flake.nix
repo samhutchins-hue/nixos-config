@@ -43,6 +43,8 @@
 
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
 
+    claude-code.url = "github:sadjow/claude-code-nix";
+
     yazi-plugins = {
       url = "github:yazi-rs/plugins";
       flake = false;
@@ -57,34 +59,21 @@
     }@inputs:
     let
       username = "samh";
-      system = "x86_64-linux";
+      mkSystem = host: nixpkgs.lib.nixosSystem {
+        modules = [
+          ./hosts/${host}
+          { nixpkgs.hostPlatform = "x86_64-linux"; }
+        ];
+        specialArgs = {
+          inherit host self inputs username;
+        };
+      };
     in
     {
       nixosConfigurations = {
-        desktop = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [ ./hosts/desktop ];
-          specialArgs = {
-            host = "desktop";
-            inherit self inputs username;
-          };
-        };
-        laptop = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [ ./hosts/laptop ];
-          specialArgs = {
-            host = "laptop";
-            inherit self inputs username;
-          };
-        };
-        vm = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [ ./hosts/vm ];
-          specialArgs = {
-            host = "vm";
-            inherit self inputs username;
-          };
-        };
+        desktop = mkSystem "desktop";
+        laptop = mkSystem "laptop";
+        vm = mkSystem "vm";
       };
     };
 }

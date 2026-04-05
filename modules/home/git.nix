@@ -1,26 +1,27 @@
-{ pkgs, ... }: 
+{ pkgs, ... }:
 {
   programs.git = {
     enable = true;
-    
-    userName = "samhutchins-hue";
-    userEmail = "samhutchins123@gmail.com";
-    
-    extraConfig = { 
+
+    settings = {
+      user.name = "samhutchins-hue";
+      user.email = "samhutchins123@gmail.com";
       init.defaultBranch = "main";
       credential.helper = "store";
       merge.conflictstyle = "diff3";
       diff.colorMoved = "default";
     };
+    signing.format = "openpgp";
+  };
 
-    delta = {
-      enable = true;
-      options = {
-        line-numbers = true;
-        side-by-side = true;
-        diff-so-fancy = true;
-        navigate = true;
-      };
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
+    options = {
+      line-numbers = true;
+      side-by-side = true;
+      diff-so-fancy = true;
+      navigate = true;
     };
   };
 

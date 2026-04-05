@@ -32,7 +32,6 @@
     ./scripts/scripts.nix # personal scripts
     ./spicetify.nix # spotify client
     ./starship.nix # shell prompt
-    ./swaylock.nix # lock screen
     ./viewnior.nix # image viewer
     ./waybar # status bar
     ./waypaper.nix # GUI wallpaper picker

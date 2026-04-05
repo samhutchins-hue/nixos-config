@@ -20,9 +20,9 @@
          algorithm: "fuzzy"    # prefix or fuzzy
          }
         } 
-        $env.PATH = ($env.PATH | 
+        $env.PATH = ($env.PATH |
         split row (char esep) |
-        prepend /home/myuser/.apps |
+        prepend $"($env.HOME)/.apps" |
         append /usr/bin/env
         )
       '';

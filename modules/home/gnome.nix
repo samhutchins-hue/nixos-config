@@ -7,6 +7,9 @@
   ]);
 
   dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+    };
     "org/gnome/TextEditor" = {
       custom-font = "Maple Mono 15";
       highlight-current-line = true;

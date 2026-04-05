@@ -1,19 +1,18 @@
 { inputs, pkgs, ... }:
-let
-  _2048 = pkgs.callPackage ../../pkgs/2048/default.nix { };
-in
 {
   home.packages = (
     with pkgs;
     [
-      _2048
-
       ## system
       bc
       keychain
       vim
+      tailscale
+      grim
+      dualsensectl # dualsense controller support for linux
 
       ## CLI utility
+      #spotify-tui
       bottles
       unrar
       djvu2pdf
@@ -77,14 +76,13 @@ in
       leetgo
       kakoune
       helix
-      claude-code
+      inputs.claude-code.packages.${pkgs.system}.default
 
       ## GUI Apps
       easyeffects
       xournalpp
       code-cursor
-      stremio
-      protonvpn-gui
+      proton-vpn
       audacity
       #bleachbit                         # cache cleaner
       gimp
@@ -97,10 +95,9 @@ in
       thunderbird
       vlc
       winetricks
-      wineWowPackages.wayland
+      wineWow64Packages.wayland
       zenity
       vesktop
-      miru
       lutris
       wowup-cf
       zed-editor
@@ -137,18 +134,17 @@ in
       doctl
 
       # Python
-      python3Full
       python3.pkgs.pip
       python312Packages.ipython
 
       # javascript
       bun
       nodejs_24
-      nodePackages.http-server
+      miniserve
 
       vulkan-tools
       vulkan-hdr-layer-kwin6
-      inputs.alejandra.defaultPackage.${system}
+      inputs.alejandra.packages.${pkgs.system}.default
 
       firefox
       google-chrome

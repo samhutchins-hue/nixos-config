@@ -3,6 +3,7 @@
   programs.yazi = {
     enable = true;
     enableZshIntegration = true;
+    shellWrapperName = "yy";
     # package = pkgs.yazi-unwrapped;
 
     settings = {
