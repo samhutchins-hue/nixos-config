@@ -14,17 +14,14 @@
 
     nix-gaming.url = "github:fufexan/nix-gaming";
 
-    nixvim.url = "github:samhutchins-hue/nixvimtemp";
+    my-nvim.url = "github:samhutchins-hue/nixvimtemp";
+
+    mix-nix.url = "github:tophc7/mix.nix";
 
     hyprland = {
       type = "git";
       url = "https://github.com/hyprwm/Hyprland";
       submodules = true;
-    };
-
-    nvf = {
-      url = "github:notashelf/nvf";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     home-manager = {
@@ -45,10 +42,17 @@
 
     claude-code.url = "github:sadjow/claude-code-nix";
 
+    # Deliberately NOT following our nixpkgs: caelestia builds against a
+    # quickshell pinned from git.outfoxxed.me that has to match the Qt 6 in its
+    # own nixpkgs. Pointing it at ours is the usual way to get a broken build.
+    # It bundles caelestia-cli as its own input, so there is no second flake.
+    caelestia-shell.url = "github:caelestia-dots/shell";
+
     yazi-plugins = {
       url = "github:yazi-rs/plugins";
       flake = false;
     };
+
   };
 
   outputs =
@@ -59,15 +63,23 @@
     }@inputs:
     let
       username = "samh";
-      mkSystem = host: nixpkgs.lib.nixosSystem {
-        modules = [
-          ./hosts/${host}
-          { nixpkgs.hostPlatform = "x86_64-linux"; }
-        ];
-        specialArgs = {
-          inherit host self inputs username;
+      mkSystem =
+        host:
+        nixpkgs.lib.nixosSystem {
+          modules = [
+            ./hosts/${host}
+            { nixpkgs.hostPlatform = "x86_64-linux"; }
+
+          ];
+          specialArgs = {
+            inherit
+              host
+              self
+              inputs
+              username
+              ;
+          };
         };
-      };
     in
     {
       nixosConfigurations = {

@@ -1,12 +1,12 @@
 {
-  inputs,
-  username,
-  host,
   ...
 }:
 {
   imports = [
-    ./ollama.nix # ollama
+    ./nixvim.nix
+    ./streamlink.nix # config with ttvpro
+    ./mpv.nix
+    ./keychain.nix
     ./bat.nix # better cat command
     ./browser.nix # firefox based browser
     ./btop.nix # resouces monitor
@@ -34,6 +34,8 @@
     ./starship.nix # shell prompt
     ./viewnior.nix # image viewer
     ./waybar # status bar
+    ./quickshell # QtQuick shell toolkit (trial, run with `qs -c bar`)
+    ./caelestia.nix # caelestia shell (trial, run with `caelestia-shell`)
     ./waypaper.nix # GUI wallpaper picker
     ./xdg-mimes.nix # xdg config
     ./yazi.nix # terminal file manager
@@ -42,5 +44,7 @@
     ./direnv.nix # direnv for nix
 
     ./ghostty.nix
+    ./emacs.nix # doom emacs
+    ./mail.nix # proton mail bridge + mbsync/mu/msmtp for mu4e
   ];
 }
