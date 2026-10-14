@@ -16,7 +16,7 @@
       "$mod, F, fullscreen, 0"
       "$mod SHIFT, F, fullscreen, 1"
       "$mod, Space, exec, toggle-float"
-      "$mod, D, exec, toggle-rofi rofi -show drun"
+      "$mod, D, exec, caelestia shell drawers toggle launcher"
       "$mod SHIFT, D, exec, vesktop --enable-features=UseOzonePlatform --ozone-platform=wayland"
       "$mod SHIFT, S, exec, hyprctl dispatch exec '[workspace 5 silent] SoundWireServer'"
       "$mod, Escape, exec, hyprlock"
