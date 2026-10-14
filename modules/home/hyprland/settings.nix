@@ -3,11 +3,15 @@
   wayland.windowManager.hyprland.settings = {
     "$mod" = "SUPER";
 
+    cursor = {
+      inactive_timeout = 2;
+    };
+
     input = {
       accel_profile = "flat";
       force_no_accel = "1";
       kb_layout = "us";
-      kb_options = "grp:alt_caps_toggle";
+      kb_options = "ctrl:nocaps";
       numlock_by_default = true;
       follow_mouse = 1;
       float_switch_override_focus = 0;
@@ -37,11 +41,11 @@
       enable_swallow = true;
       focus_on_activate = true;
       middle_click_paste = false;
-      vrr = 2; # 0=off, 1=on, 2=fullscreen only
+      vrr = 0; # 0=off, 1=on, 2=fullscreen only
     };
 
     dwindle = {
-      pseudotile = "yes";
+      # pseudotile_enabled = true;
       preserve_split = "yes";
       force_split = 2;
       use_active_for_splits = true;
@@ -69,7 +73,7 @@
 
       shadow = {
         enabled = true;
-        ignore_window = true;
+        # ignore_window = true;
         offset = "0 2";
         range = 20;
         render_power = 3;

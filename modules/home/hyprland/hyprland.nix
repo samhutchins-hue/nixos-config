@@ -13,6 +13,7 @@
     wayland
     direnv
     tesseract
+    translate-shell
     ghostty
   ];
 

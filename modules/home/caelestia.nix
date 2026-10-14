@@ -34,4 +34,17 @@
     # settings UI. Leaving it empty keeps that file runtime-writable, which is
     # what you want while trying it out. Move settings here once they settle.
   };
+
+  # Caelestia looks for wallpapers in ~/Pictures/Wallpapers (capital W); ours
+  # live in ~/Pictures/wallpapers. Both the shell (utils/Paths.qml) and the CLI
+  # (caelestia/utils/paths.py) check CAELESTIA_WALLPAPERS_DIR first, so point
+  # that at the real folder instead of setting paths.wallpaperDir in shell.json
+  # (which would make HM own that file -- see the note above). The shell scans
+  # it recursively, so subfolders like others/ show up as categories.
+  # The service gets it directly; sessionVariables covers `caelestia wallpaper`
+  # run from a terminal.
+  home.sessionVariables.CAELESTIA_WALLPAPERS_DIR = "$HOME/Pictures/wallpapers";
+  systemd.user.services.caelestia.Service.Environment = [
+    "CAELESTIA_WALLPAPERS_DIR=%h/Pictures/wallpapers"
+  ];
 }
