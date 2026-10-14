@@ -46,5 +46,6 @@
     ./ghostty.nix
     ./emacs.nix # doom emacs
     ./mail.nix # proton mail bridge + mbsync/mu/msmtp for mu4e
+    ./hermes.nix # Nous Research Hermes Agent, backed by local ollama
   ];
 }

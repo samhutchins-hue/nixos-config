@@ -42,6 +42,14 @@
 
     claude-code.url = "github:sadjow/claude-code-nix";
 
+    # Deliberately NOT following our nixpkgs. nix/pythonLock.nix reads the
+    # Python major/minor out of pm/lock.json (3.14 today) and *stops evaluation*
+    # rather than falling back if the pinned nixpkgs lacks that family. Its
+    # uv2nix closure is built against its own pin. Upstream also calls Nix a
+    # Tier 2, best-effort platform, so main can break the flake at any time --
+    # if a rebuild starts failing here, pin this input to a known-good rev.
+    hermes-agent.url = "github:NousResearch/hermes-agent";
+
     # Deliberately NOT following our nixpkgs: caelestia builds against a
     # quickshell pinned from git.outfoxxed.me that has to match the Qt 6 in its
     # own nixpkgs. Pointing it at ours is the usual way to get a broken build.

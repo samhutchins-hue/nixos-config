@@ -42,6 +42,16 @@
       # Note: Consider matching the "11.0.2" from your reference config
       # if you experience any stability issues with "11.0.0".
       rocmOverrideGfx = "11.0.2";
+
+      environmentVariables = {
+        # Hermes Agent (modules/home/hermes.nix) needs >=64k context for
+        # agentic tool use. ollama 0.40 otherwise picks 4k/32k/256k from
+        # available VRAM, and 32k would silently truncate long tool loops.
+        # This is a KV-cache cost on top of the ~18.5 GiB model: if the card
+        # runs out, ollama offloads layers to CPU and generation gets slow
+        # rather than failing, so drop this back to 32768 if that happens.
+        OLLAMA_CONTEXT_LENGTH = "65536";
+      };
     };
   };
 
