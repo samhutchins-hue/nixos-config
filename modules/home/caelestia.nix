@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, config, ... }:
 {
   imports = [ inputs.caelestia-shell.homeManagerModules.default ];
 
@@ -46,5 +46,10 @@
   home.sessionVariables.CAELESTIA_WALLPAPERS_DIR = "$HOME/Pictures/wallpapers";
   systemd.user.services.caelestia.Service.Environment = [
     "CAELESTIA_WALLPAPERS_DIR=%h/Pictures/wallpapers"
+    # Quickshell is Qt 6 and the session has no working Qt platform theme
+    # (QT_QPA_PLATFORMTHEME=qt5ct is a Qt 5 plugin), so Qt falls back to
+    # hicolor and app icons it can't find render as the magenta "missing"
+    # checkerboard. Quickshell reads its icon theme from this instead.
+    "QS_ICON_THEME=${config.gtk.iconTheme.name}"
   ];
 }
