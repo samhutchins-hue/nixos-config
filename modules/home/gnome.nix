@@ -1,17 +1,20 @@
 { pkgs, ... }:
 {
-  home.packages = (with pkgs; [
-    evince                                        # pdf
-    file-roller                                   # archive
-    gnome-text-editor                             # gedit
-  ]);
+  home.packages = (
+    with pkgs;
+    [
+      evince # pdf
+      file-roller # archive
+      gnome-text-editor # gedit
+    ]
+  );
 
   dconf.settings = {
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
     };
     "org/gnome/TextEditor" = {
-      custom-font = "Maple Mono 15";
+      custom-font = "Iosevka NFM 15";
       highlight-current-line = true;
       indent-style = "space";
       restore-session = false;
