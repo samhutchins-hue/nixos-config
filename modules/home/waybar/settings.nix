@@ -1,7 +1,7 @@
 { host, ... }:
 let
   custom = {
-    font = "Maple Mono";
+    font = "Iosevka NFM";
     font_size = "18px";
     font_weight = "bold";
     text_color = "#FBF1C7";
@@ -47,12 +47,14 @@ in
     ];
     clock = {
       calendar = {
-        format = { today = "<span color='#98971A'><b>{}</b></span>"; };
+        format = {
+          today = "<span color='#98971A'><b>{}</b></span>";
+        };
       };
       format = "  {:%I:%M %p}";
       tooltip = "true";
       tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-      format-alt = "  {:%d/%m}";
+      format-alt = "  {:%m/%d}";
     };
     "hyprland/workspaces" = {
       active-only = false;
@@ -120,7 +122,13 @@ in
     };
     battery = {
       format = "<span foreground='${yellow}'>{icon}</span> {capacity}%";
-      format-icons = [ " " " " " " " " " " ];
+      format-icons = [
+        " "
+        " "
+        " "
+        " "
+        " "
+      ];
       format-charging = "<span foreground='${yellow}'> </span>{capacity}%";
       format-full = "<span foreground='${yellow}'> </span>{capacity}%";
       format-warning = "<span foreground='${yellow}'> </span>{capacity}%";

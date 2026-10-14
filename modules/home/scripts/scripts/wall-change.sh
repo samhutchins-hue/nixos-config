@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
-if (( RANDOM % 2 )); then
-  swww img --transition-type=any $1 ;
+animations=("outer" "center" "any" "wipe")
+random_animation=${animations[RANDOM % ${#animations[@]}]}
+
+if [[ "$random_animation" == "wipe" ]]; then
+    awww img --transition-type="wipe" --transition-angle=135 $1 &
 else
-  swww img --transition-type=wipe --transition-angle=135 $1 ;
+    awww img --transition-type="$random_animation" $1 &
 fi
