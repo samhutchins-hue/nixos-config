@@ -1,14 +1,25 @@
-{ pkgs, config, inputs, ... }:
 {
-  home.packages = with pkgs;[
-    ## Utils
+  pkgs,
+  config,
+  osConfig,
+  lib,
+  inputs,
+  ...
+}:
+{
+  # imports = [
+  #   inputs.play-nix.homeManagerModules.default
+  # ];
+
+  home.packages = with pkgs; [
     protonup-qt
     gamemode
     mangohud
     winetricks
     inputs.nix-gaming.packages.${pkgs.system}.osu-lazer-bin
-
-    ## Minecraft
     prismlauncher
+    heroic
+    lutris
   ];
+
 }

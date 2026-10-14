@@ -38,13 +38,13 @@
     };
   };
 
-  # LACT - AMD GPU control (power limits, fan curves, undervolting)
-  services.lact.enable = true;
-
   # Gamescope compositor - available for HDR/upscaling when needed
   programs.gamescope = {
     enable = true;
-    capSysNice = false;  # Disabled to preserve Steam Overlay compatibility
+    capSysNice = false; # Disabled to preserve Steam Overlay compatibility
+    package = pkgs.gamescope.overrideAttrs (_: {
+      NIX_CFLAGS_COMPILE = [ "-fno-fast-math" ];
+    });
   };
 
   programs.steam = {
@@ -53,7 +53,7 @@
     # Steam-specific options
     remotePlay.openFirewall = true;
     dedicatedServer.openFirewall = false;
-    gamescopeSession.enable = false;  # Use Hyprland's native VRR instead
+    gamescopeSession.enable = true; # Use Hyprland's native VRR instead
 
     # Extra compatibility packages for Steam
     extraCompatPackages = [
@@ -62,19 +62,19 @@
 
     # Override the default Steam package by adding extra dependencies
     package = pkgs.steam.override {
-      extraPkgs = pkgs: with pkgs; [
-        xorg.libXcursor
-        xorg.libXi
-        xorg.libXinerama
-        xorg.libXScrnSaver
-        libpng
-        libpulseaudio
-        libvorbis
-        stdenv.cc.cc.lib
-        libkrb5
-        keyutils
-      ];
+      extraPkgs =
+        pkgs: with pkgs; [
+          xorg.libXcursor
+          xorg.libXi
+          xorg.libXinerama
+          xorg.libXScrnSaver
+          libpng
+          libpulseaudio
+          libvorbis
+          stdenv.cc.cc.lib
+          libkrb5
+          keyutils
+        ];
     };
   };
 }
-
