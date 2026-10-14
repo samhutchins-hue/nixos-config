@@ -1,3 +1,4 @@
-{ inputs, pkgs, ... }: {
-  home.packages = [ inputs.nixvim.packages.${pkgs.system}.default ];
+{ inputs, pkgs, ... }:
+{
+  home.packages = [ inputs.my-nvim.packages.${pkgs.system}.default ];
 }

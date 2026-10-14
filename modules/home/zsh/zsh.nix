@@ -1,4 +1,11 @@
-{ hostname, config, pkgs, host, lib, ... }:
+{
+  hostname,
+  config,
+  pkgs,
+  host,
+  lib,
+  ...
+}:
 {
   programs.zsh = {
     enable = true;
@@ -18,9 +25,6 @@
         file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
       }
     ];
-
-    #initExtra = ''
-    #'';
 
     completionInit = ''
       # Load Zsh modules
@@ -100,7 +104,6 @@
       zstyle ':fzf-tab:*' switch-group ',' '.'
     '';
 
-
     initContent = lib.mkBefore ''
       # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
       # Initialization code that may require console input (password prompts, [y/n]
@@ -123,7 +126,7 @@
       setopt hist_verify
 
       source ~/.p10k.zsh
-      
+
       # Use fd (https://github.com/sharkdp/fd) for listing path candidates.
       # - The first argument to the function ($1) is the base path to start traversal
       # - See the source code (completion.{bash,zsh}) for the details.

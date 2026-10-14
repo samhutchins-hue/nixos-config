@@ -12,7 +12,6 @@
       cd = "z";
       tt = "gtrash put";
       cat = "bat";
-      nano = "micro";
       diff = "delta --diff-so-fancy --side-by-side";
       less = "bat";
       y = "yazi";
@@ -37,14 +36,13 @@
       nix-clean = "nh clean all --keep 5";
       nix-search = "nh search";
       nix-test = "nh os test";
-      #nixvim = "nix run github:samhutchins-hue/nixvimtemp";
 
       # python
       piv = "python -m venv .venv";
       psv = "source .venv/bin/activate";
 
       # neovim
-      nvim = "nix run github:samhutchins-hue/nixvimtemp";
+      #nvim = "nix run github:samhutchins-hue/nixvimtemp";
     };
   };
 }
