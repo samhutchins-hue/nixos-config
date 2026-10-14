@@ -105,6 +105,11 @@
     '';
 
     initContent = lib.mkBefore ''
+      # Caelestia recolours terminals by writing OSC sequences to the ptys open
+      # at the time; new ones only get the scheme by replaying its saved copy.
+      # Must run before p10k instant prompt, which flags any later output.
+      [[ -t 1 && -r ~/.local/state/caelestia/sequences.txt ]] && cat ~/.local/state/caelestia/sequences.txt
+
       # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
       # Initialization code that may require console input (password prompts, [y/n]
       # confirmations, etc.) must go above this block; everything else may go below.
